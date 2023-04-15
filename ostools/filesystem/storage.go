@@ -24,6 +24,7 @@ func NewFStorage(cachePaths ...string) FStorage {
 			&sync.Mutex{},
 		}
 	}
+
 	return FStorage{
 		make(map[string]FSObject),
 		&sync.Mutex{},
