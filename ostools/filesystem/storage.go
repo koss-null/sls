@@ -31,25 +31,27 @@ func NewFStorage(cachePaths ...string) FStorage {
 	}
 }
 
-func (s FStorage) ReadPath(path string) (FSObject, error) {
+func (s FStorage) ReadPath(path string) (*FSObject, error) {
 	s.mx.Lock()
 	defer s.mx.Unlock()
 
 	obj, found := s.path2Object[path]
 	if found && !needUpgrade(obj) {
-		return obj, nil
+		return &obj, nil
 	}
 
-	obj, err := readPath(path)
+	objs, err := readPath(path)
 	if err != nil {
-		return NilFile(), err
+		return nil, err
 	}
-	s.path2Object[path] = obj
-	return obj, nil
+	for i := range objs {
+		s.path2Object[objs[i].Path()] = objs[i]
+	}
+	return &obj, nil
 }
 
-func readPath(path string) (FSObject, error) {
-
+func readPath(path string) ([]FSObject, error) {
+	return nil, nil
 }
 
 func readCache(path string) (map[string]FSObject, error) {

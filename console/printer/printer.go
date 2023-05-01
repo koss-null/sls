@@ -128,8 +128,8 @@ func (p *Printer) RemoveLine(n int) bool {
 
 // PrintBuffer clear all lines and prints current buffer, cursor is placed to 0, 0.
 func (p *Printer) PrintBuffer() {
-	p.mx.Lock()
-	defer p.mx.Unlock()
+	// p.mx.Lock()
+	// defer p.mx.Unlock()
 
 	p.MoveUp(p.cursorPosition.y)
 	p.MoveLeft(p.cursorPosition.x)
