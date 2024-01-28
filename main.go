@@ -1,34 +1,27 @@
-package main
+package sls
 
 import (
 	"fmt"
 	"os"
 
-	"github.com/koss-null/SlothLS/console/printer"
-	"github.com/koss-null/SlothLS/ostools/filesystem"
+	"github.com/koss-null/SlothLS/simple"
 )
 
 func main() {
-	fileTreeStorage := filesystem.NewFStorage("")
-	calledPath, err := os.Executable()
-	if err != nil {
-		panic("Failed to get the path binary was called from")
+	args := os.Args
+	if len(args) > 1 {
+		fmt.Println(len(args))
+		err := simple.ListDir(args[1])
+		if err != nil {
+			fmt.Println(err.Error())
+			os.Exit(1)
+		}
+		return
 	}
 
-	_, err = fileTreeStorage.ReadPath(calledPath)
+	err := simple.ListCurDir()
 	if err != nil {
-		panic(err)
+		fmt.Println(err.Error())
+		os.Exit(2)
 	}
-
-	pr := printer.NewPrinter()
-	pr.RemoveLine(1)
-	pr.PutLine("Test1")
-	pr.PutLine("Test2")
-	pr.PrintBuffer()
-	var s string
-	fmt.Scan(&s)
-	pr.MoveUp(1)
-	pr.RemoveLine(1)
-	pr.PutLine("Test1")
-	pr.PrintBuffer()
 }

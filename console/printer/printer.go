@@ -97,8 +97,8 @@ func (p *Printer) MoveRight(i int) bool {
 	return true
 }
 
-// clearLine clears line under the cursor.
-func (p *Printer) clearLine() {
+// ClearLine clears line under the cursor.
+func (p *Printer) ClearLine() {
 	fmt.Print("\033[2K")
 }
 
@@ -134,7 +134,7 @@ func (p *Printer) PrintBuffer() {
 	p.MoveUp(p.cursorPosition.y)
 	p.MoveLeft(p.cursorPosition.x)
 	for _, s := range p.buffer {
-		p.clearLine()
+		p.ClearLine()
 		fmt.Println(s)
 	}
 
