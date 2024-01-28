@@ -1,4 +1,4 @@
-module github.com/koss-null/SlothLS
+module github.com/koss-null/sls
 
 go 1.19
 

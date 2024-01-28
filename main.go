@@ -1,10 +1,10 @@
-package sls
+package main
 
 import (
 	"fmt"
 	"os"
 
-	"github.com/koss-null/SlothLS/simple"
+	"github.com/koss-null/sls/simple"
 )
 
 func main() {
